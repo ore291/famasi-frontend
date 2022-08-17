@@ -1,38 +1,45 @@
-import {useState} from 'react'
+import { useState } from "react";
 import { urlFor } from "@lib/sanity";
-import {PortableText} from '@portabletext/react'
-import {getClient} from "@lib/sanity.server"
+import { PortableText } from "@portabletext/react";
+import { getClient } from "@lib/sanity.server";
 
 function ProductPage(props) {
-  const [count, setCount] = useState(1)
-  const handleCount = (value) => !(count === 0 && value === -1) ? setCount(count + value) : count
-  const { title, price, images, body } = props;
+  const [count, setCount] = useState(1);
+  const handleCount = (value) =>
+    !(count === 0 && value === -1) ? setCount(count + value) : count;
+  const { title, price, images, body } = props.product;
+
+  const img = urlFor(images?.[0])
+    .auto("format")
+    .width(1051)
+    .fit("crop")
+    .quality(80);
+
   return (
     <div className="container max-w-6xl mx-auto px-6 mt-2">
       <div className="md:flex md:items-center">
         <div className="w-full h-64 md:w-1/2 lg:h-96">
-          <img
-            className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
-            src={images[0] ? urlFor(images[0])
-              .auto("format")
-              .width(1051)
-              .fit("crop")
-              .quality(80) :"https://dummyimage.com/300.png/09f/fff"}
-            alt={images[0]?.alt || `Photo of ${title}`}
-          />
+          {img[0] !== undefined && (
+            <img
+              className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
+              src={img}
+              alt={images[0]?.alt || `Photo of ${title}`}
+            />
+          )}
         </div>
         <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
           <h3 className="text-gray-700 uppercase text-lg">{title}</h3>
-          <span className="text-gray-500 mt-3">
-            ₦{price}
-          </span>
+          <span className="text-gray-500 mt-3">₦{price}</span>
           <hr className="my-3" />
           <div className="mt-2">
             <label className="text-gray-700 text-sm" htmlFor="count">
               Count:
             </label>
             <div className="flex items-center mt-1">
-              <button onClick={() => handleCount(1)}className="text-gray-500 focus:outline-none focus:text-gray-600">
+              <button
+                onClick={() => handleCount(1)}
+                className="text-gray-500 focus:outline-none focus:text-gray-600"
+              >
                 <svg
                   className="h-5 w-5"
                   fill="none"
@@ -46,7 +53,10 @@ function ProductPage(props) {
                 </svg>
               </button>
               <span className="text-gray-700 text-lg mx-2">{count}</span>
-              <button onClick={() => handleCount(-1)} className="text-gray-500 focus:outline-none focus:text-gray-600">
+              <button
+                onClick={() => handleCount(-1)}
+                className="text-gray-500 focus:outline-none focus:text-gray-600"
+              >
                 <svg
                   className="h-5 w-5"
                   fill="none"
@@ -83,7 +93,13 @@ function ProductPage(props) {
       </div>
       <div className="mt-16 md:w-2/3">
         <h3 className="text-gray-600 text-2xl font-medium">Description</h3>
-        {body && <PortableText value={body.en} blocks={body?.en} className="text-gray-600" />}
+        {body && (
+          <PortableText
+            value={body.en}
+            blocks={body?.en}
+            className="text-gray-600"
+          />
+        )}
       </div>
     </div>
   );

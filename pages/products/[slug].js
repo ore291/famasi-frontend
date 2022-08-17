@@ -29,22 +29,7 @@ function ProductPageContainer({ productData, preview }) {
     slug,
   } = product;
 
-  return (
-    product && (
-      <ProductPage
-        id={_id}
-        title={title}
-        price={price}
-        images={images}
-        blurb={blurb}
-        body={body}
-        tags={tags}
-        // conditions={conditions}
-        // categories={categories}
-        slug={slug?.current}
-      />
-    )
-  );
+  return <ProductPage product={product} />;
 }
 
 export async function getStaticProps({ params, preview = false }) {
