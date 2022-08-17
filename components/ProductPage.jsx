@@ -13,11 +13,11 @@ function ProductPage(props) {
         <div className="w-full h-64 md:w-1/2 lg:h-96">
           <img
             className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
-            src={urlFor(images[0])
+            src={images[0] ? urlFor(images[0])
               .auto("format")
               .width(1051)
               .fit("crop")
-              .quality(80)}
+              .quality(80) :"https://dummyimage.com/300.png/09f/fff"}
             alt={images[0]?.alt || `Photo of ${title}`}
           />
         </div>
