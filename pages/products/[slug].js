@@ -2,21 +2,19 @@ import Error from "next/error";
 import { groq } from "next-sanity";
 import { useRouter } from "next/router";
 import ProductPage from "../../components/ProductPage";
-import {  usePreviewSubscription } from "@lib/sanity";
-import {getClient} from "@lib/sanity.server"
+import { usePreviewSubscription } from "@lib/sanity";
+import { getClient } from "@lib/sanity.server";
 
 const query = groq`*[_type == "product" && slug.current == $slug][0]`;
 
 function ProductPageContainer({ productData, preview }) {
   const router = useRouter();
- 
 
   const { data: product = {} } = usePreviewSubscription(query, {
     params: { slug: productData?.slug?.current },
     initialData: productData,
     enabled: preview || router.query.preview !== null,
   });
-
 
   const {
     _id,
@@ -30,19 +28,22 @@ function ProductPageContainer({ productData, preview }) {
     categories,
     slug,
   } = product;
+
   return (
-    <ProductPage
-      id={_id}
-      title={title}
-      price={price}
-      images={images}
-      blurb={blurb}
-      body={body}
-      tags={tags}
-     conditions={conditions}
-      categories={categories}
-      slug={slug?.current}
-    />
+    product && (
+      <ProductPage
+        id={_id}
+        title={title}
+        price={price}
+        images={images}
+        blurb={blurb}
+        body={body}
+        tags={tags}
+        conditions={conditions}
+        categories={categories}
+        slug={slug?.current}
+      />
+    )
   );
 }
 

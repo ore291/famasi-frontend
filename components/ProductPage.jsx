@@ -8,7 +8,7 @@ function ProductPage(props) {
   const handleCount = (value) => !(count === 0 && value === -1) ? setCount(count + value) : count
   const { title, price, images, body } = props;
   return (
-    <div className="container mx-auto px-6">
+    <div className="container max-w-6xl mx-auto px-6 mt-2">
       <div className="md:flex md:items-center">
         <div className="w-full h-64 md:w-1/2 lg:h-96">
           <img
