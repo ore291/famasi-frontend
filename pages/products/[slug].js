@@ -39,8 +39,8 @@ function ProductPageContainer({ productData, preview }) {
         blurb={blurb}
         body={body}
         tags={tags}
-        conditions={conditions}
-        categories={categories}
+        // conditions={conditions}
+        // categories={categories}
         slug={slug?.current}
       />
     )
