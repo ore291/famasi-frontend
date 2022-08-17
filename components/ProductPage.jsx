@@ -14,7 +14,7 @@ function ProductPage(props) {
     <div className="container max-w-6xl mx-auto px-6 mt-2">
       <div className="md:flex md:items-center">
         <div className="w-full h-64 md:w-1/2 lg:h-96">
-          {images[0] !== undefined && (
+          {images !== undefined && (
             <img
               className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
               src={urlFor(images?.[0])
