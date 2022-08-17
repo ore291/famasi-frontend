@@ -9,20 +9,19 @@ function ProductPage(props) {
     !(count === 0 && value === -1) ? setCount(count + value) : count;
   const { title, price, images, body } = props.product;
 
-  const img = urlFor(images?.[0])
-    .auto("format")
-    .width(1051)
-    .fit("crop")
-    .quality(80);
 
   return (
     <div className="container max-w-6xl mx-auto px-6 mt-2">
       <div className="md:flex md:items-center">
         <div className="w-full h-64 md:w-1/2 lg:h-96">
-          {img[0] !== undefined && (
+          {images[0] !== undefined && (
             <img
               className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
-              src={img}
+              src={urlFor(images?.[0])
+                .auto("format")
+                .width(1051)
+                .fit("crop")
+                .quality(80)}
               alt={images[0]?.alt || `Photo of ${title}`}
             />
           )}
