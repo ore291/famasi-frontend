@@ -5,6 +5,11 @@
 /.pnp
 .pnp.js
 
+/famasi
+
+
+/studio
+
 # testing
 /coverage
 
